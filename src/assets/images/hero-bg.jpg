@@ -1,0 +1,4 @@
+# This is a placeholder. In a real implementation, you would use an actual image file.
+# Since we can't create binary files in this environment, you would need to
+# add your own hero background image file after the project is created.
+# For now, the website will fall back to the gradient background defined in tailwind.config.js
