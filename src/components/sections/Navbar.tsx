@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <header 
+    <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled ? 'bg-nightshade-950/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
       <div className="container-custom flex justify-between items-center h-16 md:h-20">
         <div className="flex items-center">
           <a href="#" className="flex items-center space-x-2">
-            <img 
-              src="/logo.png" 
-              alt="Emerald Roleplay Logo" 
+            <img
+              src="/logo.png"
+              alt="Emerald Roleplay Logo"
               className="h-10 w-auto"
             />
             <span className="text-2xl font-bold text-white hidden sm:inline">
@@ -56,27 +56,28 @@ const Navbar: React.FC = () => {
 
         <nav className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.name}
+              href={link.href}
               className="nav-link text-white hover:text-emerald-400"
             >
               {link.name}
             </a>
           ))}
         </nav>
-        
+
         <div className="hidden md:flex items-center space-x-4">
           <ServerStatus className="text-white" />
-          <Button 
+          <Button
             variant="primary"
             className="bg-emerald-500 hover:bg-emerald-600"
+            onClick={() => window.open('samp://play.emeraldrp.com:7777', '_blank')}
           >
             Connect Now
           </Button>
         </div>
 
-        <button 
+        <button
           className="md:hidden p-2 text-white"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
@@ -109,7 +110,11 @@ const Navbar: React.FC = () => {
               </nav>
               <div className="mt-4 flex flex-col space-y-3">
                 <ServerStatus />
-                <Button variant="primary" className="w-full">
+                <Button
+                  variant="primary"
+                  className="w-full"
+                  onClick={() => window.open('samp://play.emeraldrp.com:7777', '_blank')}
+                >
                   Connect Now
                 </Button>
               </div>

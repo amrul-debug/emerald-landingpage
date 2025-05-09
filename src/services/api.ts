@@ -23,44 +23,49 @@ interface OpenMPServer {
 
 export const serverAPI = {
   getStatus: async () => {
-    const response = await axios.get<OpenMPServer[]>('https://api.open.mp/servers');
-    const emeraldServer = response.data.find(server => 
-      server.hn.toLowerCase().includes('emerald')
-    );
-    return emeraldServer || null;
+    try {
+      const response = await axios.get<OpenMPServer[]>('https://api.open.mp/servers');
+      const emeraldServer = response.data.find(server =>
+        server.hn.toLowerCase().includes('emerald')
+      );
+      return emeraldServer || null;
+    } catch (error) {
+      console.error('Error fetching server status:', error);
+      throw error;
+    }
   }
 };
 
 export const authAPI = {
-  register: (userData: RegisterData) => 
+  register: (userData: RegisterData) =>
     api.post('/auth/register', userData),
-  
-  login: (credentials: LoginCredentials) => 
+
+  login: (credentials: LoginCredentials) =>
     api.post('/auth/login', credentials),
-  
-  logout: () => 
+
+  logout: () =>
     api.post('/auth/logout'),
-    
-  getProfile: () => 
+
+  getProfile: () =>
     api.get('/auth/profile'),
 };
 
 export const newsAPI = {
-  getNews: (page: number = 1, limit: number = 10) => 
+  getNews: (page: number = 1, limit: number = 10) =>
     api.get('/news', { params: { page, limit } }),
-    
-  getEvent: (id: string) => 
+
+  getEvent: (id: string) =>
     api.get(`/events/${id}`),
-    
-  getAllEvents: (page: number = 1, limit: number = 10) => 
+
+  getAllEvents: (page: number = 1, limit: number = 10) =>
     api.get('/events', { params: { page, limit } }),
 };
 
 export const formAPI = {
-  submitJoinRequest: (formData: JoinRequestData) => 
+  submitJoinRequest: (formData: JoinRequestData) =>
     api.post('/forms/join', formData),
-    
-  contactSupport: (formData: ContactData) => 
+
+  contactSupport: (formData: ContactData) =>
     api.post('/forms/contact', formData),
 };
 

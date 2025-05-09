@@ -26,6 +26,7 @@ const ServerStatus: React.FC<ServerStatusProps> = ({ className }) => {
           setMaxPlayers(0);
         }
       } catch (error) {
+        console.error('Failed to fetch server status:', error);
         setIsOnline(false);
         setPlayerCount(0);
         setMaxPlayers(0);
@@ -34,7 +35,7 @@ const ServerStatus: React.FC<ServerStatusProps> = ({ className }) => {
 
     fetchServerStatus();
     const interval = setInterval(fetchServerStatus, 60000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -49,15 +50,15 @@ const ServerStatus: React.FC<ServerStatusProps> = ({ className }) => {
           {isOnline ? 'Online' : 'Offline'}
         </span>
       </div>
-      
+
       {isOnline && (
         <div className="flex items-center">
           <Users size={16} className="mr-1.5" />
           <div className="flex flex-col">
             <span className="text-sm font-medium">{playerCount}/{maxPlayers}</span>
             <div className="w-24 h-1.5 bg-gray-200 rounded-full mt-1">
-              <div 
-                className="h-full bg-emerald-500 rounded-full" 
+              <div
+                className="h-full bg-emerald-500 rounded-full"
                 style={{ width: `${playerPercentage}%` }}
               />
             </div>

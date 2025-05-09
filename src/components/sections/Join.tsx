@@ -18,7 +18,7 @@ const Join: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -30,41 +30,45 @@ const Join: React.FC = () => {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.discord.trim()) {
       newErrors.discord = 'Discord tag is required';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validate()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      // In a real implementation, you would call the API
+      // await formAPI.submitJoinRequest(formData);
+
+      // Simulate API call for now
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
       setIsSuccess(true);
       setFormData({
         username: '',
@@ -72,17 +76,21 @@ const Join: React.FC = () => {
         discord: '',
         message: ''
       });
-      
-      // Reset success message after 5 seconds
+
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Handle error (show error message, etc.)
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="join" className="py-20 bg-feature-pattern">
-      <motion.div 
+      <motion.div
         className="container-custom"
         variants={staggerContainer}
         initial="hidden"
@@ -109,7 +117,7 @@ const Join: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Application Submitted!</h3>
                 <p className="text-gray-300">
-                  Thank you for your interest in joining Emerald Roleplay. We'll review your application 
+                  Thank you for your interest in joining Emerald Roleplay. We'll review your application
                   and get back to you soon via email or Discord.
                 </p>
               </div>
@@ -136,7 +144,7 @@ const Join: React.FC = () => {
                       </p>
                     )}
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-white mb-2">Email</label>
                     <input
@@ -158,7 +166,7 @@ const Join: React.FC = () => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="mb-6">
                   <label htmlFor="discord" className="block text-white mb-2">Discord Tag</label>
                   <input
@@ -179,7 +187,7 @@ const Join: React.FC = () => {
                     </p>
                   )}
                 </div>
-                
+
                 <div className="mb-6">
                   <label htmlFor="message" className="block text-white mb-2">Why do you want to join?</label>
                   <textarea
@@ -200,7 +208,7 @@ const Join: React.FC = () => {
                     </p>
                   )}
                 </div>
-                
+
                 <Button
                   type="submit"
                   variant="primary"
@@ -213,7 +221,7 @@ const Join: React.FC = () => {
               </form>
             )}
           </div>
-          
+
           <div className="mt-8 text-center">
             <p className="text-gray-300">
               Already a member? Connect to our server directly using:

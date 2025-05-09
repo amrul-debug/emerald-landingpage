@@ -24,18 +24,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is already logged in
     const checkAuthStatus = async () => {
       try {
         const token = localStorage.getItem('auth_token');
-        
+
         if (token) {
-          // In a real implementation, you would validate the token
           const response = await authAPI.getProfile();
           setUser(response.data);
         }
       } catch (error) {
-        // Token invalid or expired
+        console.error('Authentication error:', error);
         localStorage.removeItem('auth_token');
         setUser(null);
       } finally {
@@ -50,10 +48,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     try {
       const response = await authAPI.login({ username, password });
-      
+
       // Store token
       localStorage.setItem('auth_token', response.data.token);
-      
+
       // Set user data
       setUser(response.data.user);
     } catch (error) {
@@ -70,7 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.removeItem('auth_token');
       setUser(null);
     } catch (error) {
-      // Even if the API call fails, remove token and user data
+      console.error('Logout error:', error);
       localStorage.removeItem('auth_token');
       setUser(null);
       throw error;
@@ -83,10 +81,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     try {
       const response = await authAPI.register(userData);
-      
+
       // Store token
       localStorage.setItem('auth_token', response.data.token);
-      
+
       // Set user data
       setUser(response.data.user);
     } catch (error) {

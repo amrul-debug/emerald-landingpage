@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Navbar from './components/sections/Navbar';
 import Hero from './components/sections/Hero';
 import Features from './components/sections/Features';
@@ -11,13 +11,11 @@ import { AuthProvider } from './context/AuthContext';
 
 function App() {
   useEffect(() => {
-    // Update page title
     document.title = 'Emerald Roleplay | San Andreas Multiplayer Community';
-    
-    // Update favicon
+
     const favicon = document.querySelector("link[rel='icon']") as HTMLLinkElement;
     if (favicon) {
-      favicon.href = '/favicon.ico'; // This would be your actual favicon
+      favicon.href = '/favicon.ico';
     }
   }, []);
 

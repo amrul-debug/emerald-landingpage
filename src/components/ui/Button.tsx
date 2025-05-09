@@ -10,28 +10,28 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    className, 
-    variant = 'primary', 
-    size = 'md', 
-    isLoading = false, 
-    leftIcon, 
-    rightIcon, 
-    children, 
-    disabled, 
-    ...props 
+  ({
+    className,
+    variant = 'primary',
+    size = 'md',
+    isLoading = false,
+    leftIcon,
+    rightIcon,
+    children,
+    disabled,
+    ...props
   }, ref) => {
     const sizeClasses = {
       sm: 'py-1 px-3 text-sm',
       md: 'py-2 px-4',
       lg: 'py-3 px-6 text-lg',
     };
-    
+
     const variantClasses = {
       primary: 'btn-primary',
-      secondary: 'btn-secondary', 
+      secondary: 'btn-secondary',
       outline: 'btn-outline',
-      ghost: 'bg-transparent hover:bg-gray-100 text-gray-800',
+      ghost: 'bg-transparent hover:bg-gray-700/20 text-white',
     };
 
     return (
