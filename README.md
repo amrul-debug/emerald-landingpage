@@ -2,6 +2,25 @@
 
 All notable changes to the Emerald Roleplay project will be documented in this file.
 
+## [0.2.0] - 2025-05-8
+
+### Added
+- Form validation using Zod schema
+- Manual chunk splitting for better performance
+- TypeScript type checking script
+- Optimized Vite build configuration
+- Strict server port configuration
+
+### Changed
+- Improved build performance with esbuild minification
+- Enhanced code splitting strategy
+- Updated dependencies to latest versions
+- Optimized bundle size with better chunk management
+
+### Security
+- Added runtime type validation for forms
+- Enhanced data validation across components
+
 ## [0.1.0] - 2025-05-7
 
 ### Added
